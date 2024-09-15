@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace SimpleCalculator
 {
@@ -8,19 +9,23 @@ namespace SimpleCalculator
         {
             try
             {
+                Console.WriteLine("Please input two numbers");
                 // Class to convert user input
-                InputConverter inputConverter = new InputConverter();
-
                 // Class to perform actual calculations
                 CalculatorEngine calculatorEngine = new CalculatorEngine();
 
-                double firstNumber = inputConverter.ConvertInputToNumeric(Console.ReadLine());
-                double secondNumber = inputConverter.ConvertInputToNumeric(Console.ReadLine());
+                double firstNumber = InputConverter.ConvertInputToNumeric(Console.ReadLine());
+                Console.Write("Your first number is: " + firstNumber+"\n");
+                double secondNumber = InputConverter.ConvertInputToNumeric(Console.ReadLine());
+                Console.Write("Your second number is: " + secondNumber+"\n");
+                Console.WriteLine("Please input an operator (+, -, *, /)");
                 string operation = Console.ReadLine();
 
                 double result = calculatorEngine.Calculate(operation, firstNumber, secondNumber);
+                StringBuilder resultBuilder = new StringBuilder();
+                resultBuilder.AppendFormat("The value {0:0.00} {1} {2:0.00} is equal to {3:0.00}.",firstNumber,operation,secondNumber,result);
 
-                Console.WriteLine(result);
+                Console.WriteLine(resultBuilder.ToString());
 
             } catch (Exception ex)
             {
